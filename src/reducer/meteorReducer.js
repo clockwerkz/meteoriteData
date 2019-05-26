@@ -1,6 +1,6 @@
 
 const meteorReducer = (state, action) => {
-    const { pagePosition, pageSize, defaultData } = state;
+    const { pagePosition, pageSize } = state;
     switch (action.type) {
         case 'POPULATE_DATA':
             return {
@@ -10,12 +10,12 @@ const meteorReducer = (state, action) => {
                 dataSlice: action.payload.slice(state.pagePosition, state.pagePosition+state.pageSize)
             }
         case 'NEXT_PAGE':
-            if (pagePosition+pageSize<defaultData.length) {
+            if (pagePosition+pageSize<state.defaultData.length) {
                 const newPage = pagePosition + pageSize;
                 return {
                     ...state,
                     pagePosition: newPage,
-                    dataSlice: defaultData.slice(newPage, newPage+pageSize)
+                    dataSlice: state.defaultData.slice(newPage, newPage+pageSize)
                 }
             }
             return state;
@@ -25,10 +25,19 @@ const meteorReducer = (state, action) => {
                 return {
                     ...state,
                     pagePosition: newPage,
-                    dataSlice: defaultData.slice(newPage, newPage+pageSize)
+                    dataSlice: state.defaultData.slice(newPage, newPage+pageSize)
                 }
             }
             return state;
+        case 'UPDATE_SEARCH_STRING':
+            const searchString = action.payload;
+            const defaultData = state.data.filter(meteor => meteor.name.toLowerCase().includes(searchString));
+            return {
+                ...state,
+                defaultData,
+                dataSlice: state.defaultData.slice(pagePosition,pagePosition+pageSize),
+                searchString
+            }
         default:
             return state;
     }

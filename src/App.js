@@ -1,11 +1,15 @@
-import React, { useEffect, useReducer, createContext } from 'react';
-import './app.css';
+import React, { useEffect, useReducer} from 'react';
 import initialState from './reducer/initialState';
+import MeteorContext from './Context/MeteorContext';
 import meteorReducer from './reducer/meteorReducer';
+
+import SearchBar from './Components/SearchBar';
+
+import './app.css';
+
 
 const meteoriteAPI = 'https://data.nasa.gov/resource/gh4g-9sfh.json';
 
-const MeteorContext = createContext('Test');
 
 function App() {
   
@@ -18,10 +22,12 @@ function App() {
       .catch(err => console.error('Problem with data:', err));
   }, []);
 
-  const {dataSlice} = state;
+  const {dataSlice, searchString, defaultData } = state;
   return (
-    <MeteorContext.Provider value='test'>
+    <MeteorContext.Provider value={{ searchString, dispatch }}>
       <h1>Meteorite Data</h1>
+      <SearchBar />
+      <p>{defaultData.length}</p>
       <table>
       <tbody>
         <tr>
