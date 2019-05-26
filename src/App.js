@@ -1,64 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useReducer, createContext } from 'react';
 import './app.css';
+import initialState from './reducer/initialState';
+import meteorReducer from './reducer/meteorReducer';
+
 const meteoriteAPI = 'https://data.nasa.gov/resource/gh4g-9sfh.json';
+
+const MeteorContext = createContext('Test');
 
 function App() {
   
-  const [data, setData] = useState([]);
-  const [defaultData, setDefaultData] = useState([]);
-  const [dataSlice, setDataSlice] = useState([]);
-  const [pageSize, setPageSize] = useState(20);
-  const [pagePosition, setPagePosition] = useState(0);
+  const [state, dispatch] = useReducer(meteorReducer, initialState);
 
   useEffect(()=> {
     fetch(meteoriteAPI)
       .then(res => res.json())
-      .then(jsonData => setData(jsonData))
+      .then(jsonData => dispatch({type:'POPULATE_DATA', payload:jsonData}))
       .catch(err => console.error('Problem with data:', err));
   }, []);
 
-  useEffect(()=> {
-    setDefaultData(data);
-  }, [data])
-
-  useEffect(()=> {
-    if (data) {
-      setDataSlice(defaultData.slice(pagePosition, pagePosition+pageSize));
-    }
-  }, [defaultData, pagePosition, pageSize])
-
-
-  const advancePagination =() => {
-    if (pagePosition < data.length){
-      setPagePosition(pagePosition+pageSize);
-    }
-  }
-
-  const reversePagination = () => {
-    if (pagePosition > 0) {
-      setPagePosition(pagePosition-pageSize);
-    }
-  }
-
+  const {dataSlice} = state;
   return (
-    <div>
+    <MeteorContext.Provider value='test'>
       <h1>Meteorite Data</h1>
       <table>
-        { dataSlice && dataSlice.map(meteor => (
-         <tr key={meteor.id}>
-          <td>{meteor.name}</td>
-          <td>{meteor.recclass}</td>
-          <td>{meteor.mass}</td>
-          <td>{meteor.fall}</td>
-          <td>{Date(meteor.year)}</td>
-        </tr> 
-        )) }
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Rec Class</th>
+          <th>Mass(g)</th>
+          <th>Fall</th>
+          <th>Year</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+          { dataSlice && dataSlice.map(meteor => (
+          <tr key={meteor.id}>
+            <td>{meteor.name}</td>
+            <td>{meteor.recclass}</td>
+            <td>{meteor.mass}</td>
+            <td>{meteor.fall}</td>
+            <td>{meteor.year ? (meteor.year.slice(0,4)):("UNK")}</td>
+            {
+              meteor.geolocation ? (
+                <td>{meteor.geolocation.latitude}</td>
+              ): 
+              (
+                <td>UNK</td>
+              )
+            }
+            {
+              meteor.geolocation ? (
+                <td>{meteor.geolocation.longitude}</td>
+              ): 
+              (
+                <td>UNK</td>
+              )
+            }
+          </tr> 
+          )) }
+        </tbody>
       </table>
       <div>
-        <button onClick={reversePagination}>Previous Page</button>
-        <button onClick={advancePagination}>Next Page</button>
+        <button onClick={()=>dispatch({type:'PREV_PAGE'})}>Previous Page</button>
+        <button onClick={()=>dispatch({type:'NEXT_PAGE'})}>Next Page</button>
       </div>
-    </div>
+    </MeteorContext.Provider>
   );
 }
 
