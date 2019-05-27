@@ -4,12 +4,17 @@ import MeteorContext from '../Context/MeteorContext';
 
 
 const SearchBar = () => {
-    const [searchString, setSearchString] = useState('');
-    const { updateSearchQuery } = useContext(MeteorContext); 
+    const { searchString, setSearchString, setSearchFilter } = useContext(MeteorContext); 
+    const [search, setSearch] = useState(searchString);
     return ( 
        <div>
-            <input type='text' value={searchString} onChange={(e)=> setSearchString(e.target.value)} />
-            <button onClick={()=> updateSearchQuery(searchString)}>Search</button>
+            <input type='text' value={search} onChange={(e)=> setSearch(e.target.value)} />
+            <button onClick={()=> setSearchString(search)}>Search</button>
+            <label htmlFor='SearchType'>Search Options:</label>
+            <select name='SearchType' onChange={(e)=> setSearchFilter(e.target.value)}>
+                <option value="startsWith">Starts With</option>
+                <option value="contains">Contains</option>
+            </select>
         </div>
     )
 }
