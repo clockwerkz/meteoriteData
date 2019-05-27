@@ -2,32 +2,32 @@ import soda from 'soda-js';
 
 const consumer = new soda.Consumer('data.nasa.gov');
 
-const fetchInitialData = (page, cb) => {
+const fetchInitialData = (page, offset, cb) => {
     consumer.query()
       .withDataset('gh4g-9sfh')
       .order('name ASC')
       .limit(page)
-      .offset(0)
+      .offset(offset)
       .getRows()
       .on('success', (data)=> cb(data))
       .on('error', (error)=> console.error(error));
 }
 
 
-const queryDataStartsWith = (page, cb, searchString) => {
+const queryDataStartsWith = (page, offset, cb, searchString) => {
     searchString = searchString[0].toUpperCase() + searchString.slice(1).toLowerCase();
       consumer.query()
         .withDataset('gh4g-9sfh')
         .order('name ASC')
         .where("name like '"+searchString+"%'")
         .limit(page)
-        .offset(0)
+        .offset(offset)
         .getRows()
         .on('success', (data)=> cb(data))
         .on('error', (error)=> console.error(error));
 }
 
-const queryDataContains = (page, cb, searchString) => {
+const queryDataContains = (page, offset, cb, searchString) => {
     const searchStringUpper = searchString[0].toUpperCase() + searchString.slice(1).toLowerCase();
     searchString = searchString.toLowerCase();
       consumer.query()
@@ -35,7 +35,7 @@ const queryDataContains = (page, cb, searchString) => {
         .order('name ASC')
         .where("name like '%"+searchString+"%' OR name like '%"+searchStringUpper+"%'")
         .limit(page)
-        .offset(0)
+        .offset(offset)
         .getRows()
         .on('success', (data)=> cb(data))
         .on('error', (error)=> console.error(error));

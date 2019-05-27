@@ -3,7 +3,8 @@ import MeteorContext from './Context/MeteorContext';
 import  {fetchInitialData, queryDataStartsWith, queryDataContains } from './helpers/meteorData';
 
 import SearchBar from './Components/SearchBar';
-
+import Pagination from './Components/Pagination';
+import DataTable from './Components/DataTable';
 import './app.css';
 
 
@@ -18,64 +19,42 @@ function App() {
   useEffect(()=> {
     if (searchString) {
       if (searchFilter === 'startsWith') {
-        queryDataStartsWith(page, setData, searchString);    
+        queryDataStartsWith(page, offset, setData, searchString);    
       } else {
-        queryDataContains(page, setData, searchString); 
+        queryDataContains(page, offset, setData, searchString); 
       }
     } else {
-      fetchInitialData(page, setData);
+      fetchInitialData(page, offset, setData);
     }
-  }, [searchString, searchFilter, page])
+  }, [searchString, searchFilter, offset, page])
+
+
+  const updateSearch = (newSearchString) => {
+    setSearchString(newSearchString);
+    setOffset(0);
+  }
 
   const nextPage = ()=> {
-    setPage(page+100);
+    if (page<=data.length) setOffset(offset+page);
+  }
+
+  const prevPage = ()=> {
+    if (offset-page >= 0) {
+      setOffset(offset-page)
+    } else {
+      setOffset(0);
+    }
   }
 
   return (
-    <MeteorContext.Provider value={{ searchString, setSearchString, searchFilter, setSearchFilter }}>
+    <MeteorContext.Provider value={{ data, searchString, updateSearch, searchFilter, setSearchFilter, page, setPage }}>
       <h1>Meteorite Data</h1>
       <SearchBar />
+      <Pagination />
       <p>{data.length}</p>
-      <table>
-      <tbody>
-        <tr>
-          <th>Name</th>
-          <th>Rec Class</th>
-          <th>Mass(g)</th>
-          <th>Fall</th>
-          <th>Year</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-        </tr>
-          { data && data.map(meteor => (
-          <tr key={meteor.id}>
-            <td>{meteor.name}</td>
-            <td>{meteor.recclass}</td>
-            <td>{meteor.mass}</td>
-            <td>{meteor.fall}</td>
-            <td>{meteor.year ? (meteor.year.slice(0,4)):("UNK")}</td>
-            {
-              meteor.geolocation ? (
-                <td>{meteor.geolocation.latitude}</td>
-              ): 
-              (
-                <td>UNK</td>
-              )
-            }
-            {
-              meteor.geolocation ? (
-                <td>{meteor.geolocation.longitude}</td>
-              ): 
-              (
-                <td>UNK</td>
-              )
-            }
-          </tr> 
-          )) }
-        </tbody>
-      </table>
+      {data.length!==0 ? (<DataTable />):(<p>No Meteorite Results Found</p>)}
       <div>
-        <button>Previous Page</button>
+        <button onClick={prevPage}>Previous Page</button>
         <button onClick={nextPage}>Next Page</button>
       </div>
     </MeteorContext.Provider>
