@@ -11,7 +11,7 @@ import './app.css';
 function App() {
 
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(100);
+  const [page, setPage] = useState(20);
   const [offset, setOffset] = useState(0);
   const [searchString, setSearchString] = useState('');
   const [searchFilter, setSearchFilter] = useState('startsWith');
@@ -51,7 +51,6 @@ function App() {
       <h1>Meteorite Data</h1>
       <SearchBar />
       <Pagination />
-      <p>{data.length}</p>
       {data.length!==0 ? (<DataTable />):(<p>No Meteorite Results Found</p>)}
       <div>
         <button onClick={prevPage}>Previous Page</button>
