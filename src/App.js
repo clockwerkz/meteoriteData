@@ -2,10 +2,24 @@ import React, { useEffect, useReducer} from 'react';
 import initialState from './reducer/initialState';
 import MeteorContext from './Context/MeteorContext';
 import meteorReducer from './reducer/meteorReducer';
+import soda from 'soda-js';
 
 import SearchBar from './Components/SearchBar';
 
 import './app.css';
+
+
+const consumer = new soda.Consumer('data.nasa.gov');
+consumer.query()
+  .withDataset('gh4g-9sfh')
+  .where("name like 'Z%'")
+  .limit(10)
+  .offset(40)
+  .getRows()
+  .on('success', (rows)=> console.log(rows))
+  .on('error', (error)=> console.error(error));
+
+
 
 
 const meteoriteAPI = 'https://data.nasa.gov/resource/gh4g-9sfh.json';
