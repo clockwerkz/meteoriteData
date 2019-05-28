@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/meteoriteData/static/css/main.0a239085.chunk.css",
+    "main.js": "/meteoriteData/static/js/main.98587568.chunk.js",
+    "main.js.map": "/meteoriteData/static/js/main.98587568.chunk.js.map",
+    "runtime~main.js": "/meteoriteData/static/js/runtime~main.0e36c3cc.js",
+    "runtime~main.js.map": "/meteoriteData/static/js/runtime~main.0e36c3cc.js.map",
+    "static/js/2.ae80d68b.chunk.js": "/meteoriteData/static/js/2.ae80d68b.chunk.js",
+    "static/js/2.ae80d68b.chunk.js.map": "/meteoriteData/static/js/2.ae80d68b.chunk.js.map",
+    "index.html": "/meteoriteData/index.html",
+    "precache-manifest.d4a65c2de6d61104c07e9d91095ac254.js": "/meteoriteData/precache-manifest.d4a65c2de6d61104c07e9d91095ac254.js",
+    "service-worker.js": "/meteoriteData/service-worker.js",
+    "static/css/main.0a239085.chunk.css.map": "/meteoriteData/static/css/main.0a239085.chunk.css.map"
+  }
+}
