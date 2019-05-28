@@ -4,7 +4,7 @@ import MeteorContext from '../Context/MeteorContext';
 
 
 const SearchBar = () => {
-    const { searchString, updateSearch, setSearchFilter } = useContext(MeteorContext); 
+    const { searchString, updateSearch } = useContext(MeteorContext); 
     const [search, setSearch] = useState(searchString);
     return ( 
        <div className='search-bar--wrapper'>

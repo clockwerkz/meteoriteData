@@ -6,7 +6,7 @@ const Pagination = ()=> {
     const values = [10, 20, 50, 100];
     const {page ,setPage} = useContext(MeteorContext); 
     return (
-      <div class="pagination">
+      <div className="pagination">
         {values.map(amt=> (
             <div key={amt} className="page-return--wrapper">
                 <input 
