@@ -9,7 +9,7 @@
     "react-scripts": "3.0.1",
     "soda-js": "^0.2.3"
   },
-  "homepage":"https://clockwerkz.github.io/meteoriteData",
+  "homepage": "https://clockwerkz.github.io/meteoriteData",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
