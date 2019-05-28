@@ -1,14 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;  
+    background-color: #0C0032;
+    color: white;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.search-bar--wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.search-bar {
+    font-size: 2rem;
+}
+.search-options {
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem 0;
+}
+.btn {
+    border: none;
+    font-size: 2rem;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.btn--page {
+    font-size: 1.5rem;
+    background-color:#ffd30e;
+    color: #0C0032;
+
+}
+
+.btn-page--wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+h1 span {
+    color: #ffd30e;
+    font-weight: 800;
+}
+
 table {
-    border: 1px solid #444;
+   width: 100%;
+   color: #0C0032;
 }
-
-tr:hover {
-    color: #fff;
-    background-color: #000;
+th {
+    font-size: 1.25rem;
+    padding: .25rem;
+    background-color: #ffed9b;;
 }
-
+tr {
+    background-color: #c3bed6;  
+}
+tr:nth-child(even) {
+    background-color: #9590a7;
+    color: #0C0032;
+}
 td {
-    border: 1px solid #444;
     margin: 0;
     padding: 5px 5px;
+}
+
+
+.pagination {
+    display: flex;
+}
+
+.page-return--wrapper {
+    margin: 0 .5rem;
 }

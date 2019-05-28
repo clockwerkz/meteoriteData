@@ -5,6 +5,7 @@ import  {fetchInitialData, queryDataStartsWith, queryDataContains } from './help
 import SearchBar from './Components/SearchBar';
 import Pagination from './Components/Pagination';
 import DataTable from './Components/DataTable';
+import SearchType from './Components/SearchType';
 import './app.css';
 
 
@@ -48,13 +49,18 @@ function App() {
 
   return (
     <MeteorContext.Provider value={{ data, searchString, updateSearch, searchFilter, setSearchFilter, page, setPage }}>
-      <h1>Meteorite Data</h1>
-      <SearchBar />
-      <Pagination />
-      {data.length!==0 ? (<DataTable />):(<p>No Meteorite Results Found</p>)}
-      <div>
-        <button onClick={prevPage}>Previous Page</button>
-        <button onClick={nextPage}>Next Page</button>
+      <div className='container'>
+        <h1><span>Meteorite</span> Data</h1>
+        <SearchBar />
+        <div className="search-options">
+          <SearchType />
+          <Pagination />
+        </div>
+        {data.length!==0 ? (<DataTable />):(<p>No Meteorite Results Found</p>)}
+        <div className="btn-page--wrapper">
+          <button className="btn btn--page" onClick={prevPage}>Previous Page</button>
+          <button className="btn btn--page" onClick={nextPage}>Next Page</button>
+        </div>
       </div>
     </MeteorContext.Provider>
   );

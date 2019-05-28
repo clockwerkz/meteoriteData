@@ -7,16 +7,9 @@ const SearchBar = () => {
     const { searchString, updateSearch, setSearchFilter } = useContext(MeteorContext); 
     const [search, setSearch] = useState(searchString);
     return ( 
-       <div>
-            <div>
-                <input type='text' value={search} onChange={(e)=> setSearch(e.target.value)} />
-                <button onClick={()=> updateSearch(search)}>Search</button>
-            </div>
-            <label htmlFor='SearchType'>Search Options:</label>
-            <select name='SearchType' onChange={(e)=> setSearchFilter(e.target.value)}>
-                <option value="startsWith">Starts With</option>
-                <option value="contains">Contains</option>
-            </select>
+       <div className='search-bar--wrapper'>
+            <input type='text' className="search-bar" value={search} onChange={(e)=> setSearch(e.target.value)} />
+            <button className="btn btn--search" onClick={()=> updateSearch(search)}>Search</button>
         </div>
     )
 }

@@ -6,9 +6,9 @@ const Pagination = ()=> {
     const values = [10, 20, 50, 100];
     const {page ,setPage} = useContext(MeteorContext); 
     return (
-      <div>
+      <div class="pagination">
         {values.map(amt=> (
-            <div key={amt}>
+            <div key={amt} className="page-return--wrapper">
                 <input 
                     type="radio" 
                     id="{amt}" 

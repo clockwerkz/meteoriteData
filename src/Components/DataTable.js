@@ -20,7 +20,7 @@ const DataTable = () => {
                 <tr key={meteor.id}>
                     <td>{meteor.name}</td>
                     <td>{meteor.recclass}</td>
-                    <td>{meteor.mass}</td>
+                    <td>{meteor.mass ? (meteor.mass):("UNK")}</td>
                     <td>{meteor.fall}</td>
                     <td>{meteor.year ? (meteor.year.slice(0,4)):("UNK")}</td>
                     {
