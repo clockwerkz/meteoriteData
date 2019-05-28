@@ -29,6 +29,10 @@ function App() {
     }
   }, [searchString, searchFilter, offset, page])
 
+  const updateSearchFilter = (newSearchFilter)=> {
+    setSearchFilter(newSearchFilter);
+    setOffset(0);
+  }
 
   const updateSearch = (newSearchString) => {
     setSearchString(newSearchString);
@@ -48,7 +52,7 @@ function App() {
   }
 
   return (
-    <MeteorContext.Provider value={{ data, searchString, updateSearch, searchFilter, setSearchFilter, page, setPage }}>
+    <MeteorContext.Provider value={{ data, searchString, updateSearch, searchFilter, updateSearchFilter, page, setPage }}>
       <div className='container'>
         <h1><span>Meteorite</span> Data</h1>
         <SearchBar />
