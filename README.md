@@ -2,7 +2,7 @@
 By Carlos Fins
 
 ## Live Project
-The Meteorite App is live and can be demoed here:<br>[Meteorite Data](https://clockwerkz.github.io/meteoriteData)
+Demo of the project can be found here:<br>[Meteorite Data](https://clockwerkz.github.io/meteoriteData)
 
 ## Project Info
 
@@ -16,3 +16,10 @@ In addition, I provided a way to select the desired set size of the results, and
 In order to install, simply clone or download the project by pressing the green *Clone Or Download* button above.<br>
 Once downloaded, run npm install from the root of the project folder.
 **Node** and **NPM** are required in order to build/run the project locally.
+
+## Licensing
+This project is licensed under the Creative Commons Licensing. You are free to:
+
+* Share - copy and redistribute the matertial in any medium or format
+
+* Adapt - remix, transform, and build upon the material for any purpose, even commercially. 
